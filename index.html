@@ -112,10 +112,7 @@
     </div>
   </section>
 
- <!-- VALORACIONES -->
-<section id="valoracionesAprobadas" class="py-12 md:py-16 bg-gray-50">
-  <div class="max-w-4xl mx-auto px-4 text-center">
-    <h2 class="text-2xl md:text-3xl fo<!-- VALORACIONES -->
+<!-- VALORACIONES -->
 <section id="valoracionesAprobadas" class="py-12 md:py-16 bg-gray-50">
   <div class="max-w-4xl mx-auto px-4 text-center">
     <h2 class="text-2xl md:text-3xl font-bold mb-6 md:mb-8 text-[#156C8C]">
@@ -133,20 +130,22 @@
 
       <form id="formValoracion" class="space-y-4">
         <input type="text" name="nombre" placeholder="Tu nombre" required
-          class="w-full border rounded px-3 py-2" />
+          class="w-full border rounded px-3 py-2 text-sm" />
 
-        <select name="puntuacion" required class="w-full border rounded px-3 py-2">
-          <option value="5">★★★★★ </option>
-          <option value="4">★★★★ </option>
-          <option value="3">★★★ </option>
-          <option value="2">★★ </option>
-          <option value="1">★ </option>
+        <select name="puntuacion" required
+          class="w-full border rounded px-3 py-2 text-sm text-gray-700">
+          <option value="">Calificación</option>
+          <option value="5">★★★★★ Excelente</option>
+          <option value="4">★★★★ Muy bueno</option>
+          <option value="3">★★★ Bueno</option>
+          <option value="2">★★ Regular</option>
+          <option value="1">★ Malo</option>
         </select>
 
         <textarea name="comentario" rows="3" placeholder="Tu comentario" required
-          class="w-full border rounded px-3 py-2"></textarea>
+          class="w-full border rounded px-3 py-2 text-sm"></textarea>
 
-        <button type="submit" class="btn-gold w-full py-2 rounded font-semibold">
+        <button type="submit" class="btn-gold w-full py-2 rounded font-semibold text-sm">
           Enviar valoración
         </button>
 
@@ -235,6 +234,7 @@ document.getElementById("formValoracion").addEventListener("submit", async funct
 </a>
 </body>
 </html>
+
 
 
 
