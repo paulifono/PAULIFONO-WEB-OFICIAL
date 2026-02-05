@@ -112,30 +112,47 @@
     </div>
   </section>
 
-  <!-- VALORACIONES -->
-  <section id="valoracionesAprobadas" class="py-12 md:py-16 bg-gray-50">
-    <div class="max-w-4xl mx-auto px-4 text-center">
-      <h2 class="text-2xl md:text-3xl font-bold mb-6 md:mb-8 text-[#156C8C]">Valoraciones de Pacientes</h2>
-      <div id="listaValoraciones" class="space-y-4"></div>
-    </div>
-  </section>
+ <!-- VALORACIONES -->
+<section id="valoracionesAprobadas" class="py-12 md:py-16 bg-gray-50">
+  <div class="max-w-4xl mx-auto px-4 text-center">
+    <h2 class="text-2xl md:text-3xl font-bold mb-6 text-[#156C8C]">Valoraciones de Pacientes</h2>
+    <div id="listaValoraciones" class="space-y-4"></div>
+  </div>
+</section>
 
-  <!-- FORMULARIO -->
-  <form id="valoracionForm" class="bg-white p-4 md:p-6 rounded-lg mt-8 shadow text-left max-w-lg mx-auto">
-    <h3 class="text-lg md:text-xl font-semibold mb-4 text-center text-[#156C8C]">Deja tu valoración</h3>
-    <input type="text" placeholder="Tu nombre" class="w-full border rounded p-2 mb-4" required>
-    <select class="w-full border rounded p-2 mb-4">
-      <option>★★★★★</option>
-      <option>★★★★☆</option>
-      <option>★★★☆☆</option>
-      <option>★★☆☆☆</option>
-      <option>★☆☆☆☆</option>
-    </select>
-    <textarea placeholder="Tu opinión..." class="w-full border rounded p-2 mb-6" required></textarea>
-    <button class="bg-[#d4a000] text-black w-full py-3 rounded-lg font-semibold shadow-lg">
-      Enviar valoración
-    </button>
-  </form>
+<script>
+async function cargarValoraciones() {
+  try {
+    const response = await fetch("https://script.google.com/macros/s/AKfycbzhdeArZuU6TCl4xsrGOvI61XyO1C6KGnIeqCuh7z_QYoiNvRcgfon9dmv4a0spN3pHgg/exec");
+    const valoraciones = await response.json();
+    const contenedor = document.getElementById("listaValoraciones");
+    contenedor.innerHTML = "";
+
+    if (!valoraciones || valoraciones.length === 0) {
+      contenedor.innerHTML = "<p class='text-gray-600'>No hay valoraciones aprobadas aún.</p>";
+      return;
+    }
+
+    valoraciones.forEach(v => {
+      const card = document.createElement("div");
+      card.className = "card p-4 bg-white shadow rounded text-left";
+      card.innerHTML = `
+        <p class="font-semibold text-[#156C8C]">${v.nombre}</p>
+        <p class="text-yellow-500">${"★".repeat(v.puntuacion)}${"☆".repeat(5 - v.puntuacion)}</p>
+        <p class="text-gray-700">${v.comentario}</p>
+      `;
+      contenedor.appendChild(card);
+    });
+
+  } catch (error) {
+    console.error("Error al cargar valoraciones:", error);
+    const contenedor = document.getElementById("listaValoraciones");
+    contenedor.innerHTML = "<p class='text-red-500'>No se pudieron cargar las valoraciones.</p>";
+  }
+}
+
+document.addEventListener("DOMContentLoaded", cargarValoraciones);
+</script>
 
   <!-- FOOTER -->
   <footer class="text-center py-6 text-white bg-[#156C8C]/90">
@@ -153,6 +170,7 @@
 </a>
 </body>
 </html>
+
 
 
 
